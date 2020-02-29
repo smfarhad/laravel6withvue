@@ -6,8 +6,8 @@
 $fa-font-path:        "../webfonts";
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-@import '~admin-lte/dist/css/adminlte.css';
-
+@import '~admin-lte/build/scss/AdminLTE-raw';
+          
 
 // fontawesome 
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";

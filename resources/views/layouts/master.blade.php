@@ -15,6 +15,11 @@
     <div class="wrapper">
       <!-- Navbar -->
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" role="button" href="#" data-widget="pushmenu"><i class="fas fa-bars"></i></a>
+        </li>
+      </ul>
         <!-- SEARCH FORM -->
         <form class="form-inline ml-3">
           <div class="input-group input-group-sm">
@@ -64,7 +69,7 @@
                   </p>
                 </router-link>
               </li>
-              
+              @can('isAdmin')
               <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-cog "></i>
@@ -90,6 +95,15 @@
               </li>
               
               <li class="nav-item">
+                <router-link to="/admin/developer" class="nav-link">
+                  <i class="nav-icon fas fa-paper-plane"></i>
+                  <p> 
+                    Developer
+                  </p>
+                </router-link>
+              </li>
+              @endcan
+              <li class="nav-item">
                 <router-link to="/admin/profile" class="nav-link">
                   <i class="nav-icon fas fa-user"></i>
                   <p>
@@ -103,12 +117,12 @@
                   document.getElementById('logout-form').submit();"
                   class="nav-link">
                   <i class="nav-icon fas fa-power-off"></i>
-                                        {{ __('Logout') }}
-                                    </a>
+                      {{ __('Logout') }}
+                  </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
                 
               </li>
             </ul>
@@ -135,6 +149,8 @@
         <div class="content">
           <div class="container-fluid">
               <router-view></router-view>
+              <!-- progress bar -->
+              <vue-progress-bar></vue-progress-bar>
           </div><!-- /.container-fluid -->
         </div>
         <!-- /.content -->
@@ -158,7 +174,11 @@
   </div>
 
 <!-- REQUIRED SCRIPTS -->
-
+@auth
+<script>
+  window.user = @json(auth()->user())
+</script>  
+@endauth
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}" defer></script>
 
